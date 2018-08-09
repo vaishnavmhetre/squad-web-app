@@ -3,15 +3,23 @@
             v-model="notification.visible"
             :color="notification.color"
             :multi-line="notification.multiLine"
+            bottom
+            right
     >
         {{ notification.message }}
-        <v-btn
-                dark
-                flat
-                @click="notification.visible = false"
-        >
-            Close
-        </v-btn>
+        <v-tooltip left>
+            <v-btn
+                    slot="activator"
+                    dark
+                    flat
+                    @click="notification.visible = false"
+                    icon
+                    small
+            >
+                <v-icon>close</v-icon>
+            </v-btn>
+            <span>Close</span>
+        </v-tooltip>
     </v-snackbar>
 </template>
 
@@ -24,7 +32,7 @@
                     visible: false,
                     color: 'success',
                     multiLine: false,
-                    timeout: 6000
+                    timeout: 2000
                 }
             }
         },
@@ -35,7 +43,7 @@
             })
         },
         methods: {
-            setUp(notification){
+            setUp(notification) {
                 this.notification = Object.assign(this.notification, notification)
             }
         }

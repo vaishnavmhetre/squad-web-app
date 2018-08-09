@@ -2,24 +2,105 @@
     <v-app class="grey lighten-3">
         <v-toolbar
                 app
-                absolute
                 dense
                 color="primary"
                 dark
                 scroll-off-screen
-                scroll-target="#apex-content"
+                :scroll-threshold="10"
                 class="elevation-2"
         >
+            <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title v-text="title"></v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn icon class="white--text">
-                <v-icon>menu</v-icon>
-            </v-btn>
+            <v-toolbar-items>
+                <!--<v-btn icon class="white&#45;&#45;text">
+                    <v-icon>menu</v-icon>
+                </v-btn>-->
+            </v-toolbar-items>
         </v-toolbar>
+
+        <v-navigation-drawer
+                persistent
+                :mini-variant="miniVariant"
+                v-model="drawer"
+                enable-resize-watcher
+                fixed
+                app
+        >
+            <v-list dense>
+                <v-tooltip
+                        right
+                        v-if="miniVariant"
+                        class="hidden-sm-and-down"
+                >
+                    <v-list-tile
+                            v-if="miniVariant"
+                            @click.stop="miniVariant = !miniVariant"
+                            slot="activator"
+                    >
+                        <v-list-tile-action>
+                            <v-icon>chevron_right</v-icon>
+                        </v-list-tile-action>
+                    </v-list-tile>
+                    <span>Expand</span>
+                </v-tooltip>
+                <v-list-tile tag="div" v-else>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Navigation</v-list-tile-title>
+                    </v-list-tile-content>
+
+                    <v-list-tile-action>
+                        <v-tooltip
+                                left
+                                class="hidden-sm-and-down"
+                        >
+                            <v-btn
+                                    icon
+                                    @click.stop="miniVariant = !miniVariant"
+                                    slot="activator"
+                            >
+                                <v-icon>chevron_left</v-icon>
+                            </v-btn>
+                            <span>Shorten</span>
+                        </v-tooltip>
+                    </v-list-tile-action>
+
+                </v-list-tile>
+            </v-list>
+            <v-divider light></v-divider>
+            <v-list dense >
+                <v-tooltip
+                        right
+                        v-for="item in items"
+                        :key="item.title"
+                        :disabled="!miniVariant"
+                >
+                    <v-list-tile
+                            @click=""
+                            ripple
+                            :to="item.routerLinkTo"
+                            slot="activator"
+                            class="mt-1"
+                    >
+                        <v-list-tile-action>
+                            <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-tile-action>
+
+                        <v-list-tile-content>
+                            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                    <span v-text="item.title" v-if="miniVariant"></span>
+                </v-tooltip>
+            </v-list>
+        </v-navigation-drawer>
+
         <v-content
                 id="apex-content"
         >
-            <router-view/>
+            <v-slide-y-reverse-transition>
+                <router-view/>
+            </v-slide-y-reverse-transition>
         </v-content>
         <Notification></Notification>
     </v-app>
@@ -27,6 +108,7 @@
 
 <script>
     import Notification from '@/components/utilities/Notification'
+
     export default {
         name: "App",
         components: {
@@ -34,7 +116,21 @@
         },
         data() {
             return {
-                title: "Squad"
+                title: "Squad",
+                drawer: false,
+                miniVariant: false,
+                items: [
+                    {
+                        icon: 'home',
+                        title: 'Home',
+                        routerLinkTo: '/'
+                    },
+                    {
+                        icon: 'library_books',
+                        title: 'Posts',
+                        routerLinkTo: '/posts'
+                    }
+                ],
             };
         }
     };

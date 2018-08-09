@@ -10,7 +10,7 @@ Vue.config.productionTip = false;
 
 Vue.prototype.$eventHub = new Vue({})
 
-Vue.prototype.$apiUrl = "http://localhost:8000"
+Vue.prototype.$apiUrl = "https://jsonplaceholder.typicode.com"
 
 new Vue({
   router,
