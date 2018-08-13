@@ -7,15 +7,14 @@
                 class="pointer"
         >
             <v-card-text class="pb-0">
-                {{post.description}}
+                {{comment.description}}
             </v-card-text>
             <v-card-actions class="px-3 my-1 ">
-                <PostLikes :post_id="post.id" class="pointer" ></PostLikes>
-                <PostComments :post_id="post.id" class="pointer" ></PostComments>
+                <CommentLikes :comment_id="comment.id" class="pointer" ></CommentLikes>
             </v-card-actions>
             <v-card-text class="grey lighten-3 grey--text py-2 caption">
                 <v-flex>
-                    <PostCreator :user_id="post.user_id" class="pointer"></PostCreator> posted {{humanReadableDate(post.created_at)}}
+                    <CommentCreator :user_id="comment.user_id" class="pointer"></CommentCreator> commented {{humanReadableDate(comment.created_at)}}
                 </v-flex>
             </v-card-text>
         </v-card>
@@ -25,17 +24,15 @@
 <script>
     import { humanReadableDate }  from '@/plugins/utilities/DateManipulators'
 
-    import PostCreator from '@/components/posts/all/one/Creator'
-    import PostLikes from '@/components/posts/one/Like'
-    import PostComments from '@/components/posts/one/Comment'
+    import CommentCreator from '@/components/comments/all/one/Creator'
+    import CommentLikes from '@/components/comments/one/Like'
 
     export default {
         name: "One",
-        props: ['post'],
+        props: ['comment'],
         components: {
-            PostCreator,
-            PostLikes,
-            PostComments
+            CommentCreator,
+            CommentLikes,
         },
         methods: {
             humanReadableDate: humanReadableDate
@@ -44,7 +41,5 @@
 </script>
 
 <style scoped>
-    .pointer{
-        cursor: pointer;
-    }
+
 </style>

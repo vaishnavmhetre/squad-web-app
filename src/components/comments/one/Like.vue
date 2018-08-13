@@ -119,11 +119,11 @@
 
     export default {
         name: "Like",
-        props: ['post_id'],
+        props: ['comment_id'],
         data() {
             return {
-                getLikesUrl: 'posts/' + this.post_id + '/likes',
-                toggleLikesUrl: 'posts/' + this.post_id + '/likes/toggle',
+                getLikesUrl: 'comments/' + this.comment_id + '/likes',
+                toggleLikesUrl: 'comments/' + this.comment_id + '/likes/toggle',
                 liked: false,
                 loadingLikes: true,
                 likes: [],

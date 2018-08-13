@@ -37,8 +37,8 @@
                         </v-slide-y-transition>
 
                         <v-layout row wrap class="" v-if="!loading && posts.length > 0">
-                                <OnePost class="mt-3" v-for="(post, index) in posts" :key="index"
-                                         :post="post"></OnePost>
+                            <OnePost class="mt-3" v-for="post in posts" :key="post.id"
+                                     :post="post"></OnePost>
                         </v-layout>
 
                     </v-flex>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-    import axios from "axios";
+    import Api from "@/plugins/Api";
 
     import OnePost from '@/components/posts/all/one/One'
 
@@ -60,19 +60,21 @@
         },
         data() {
             return {
+                getCommentsUrl: "/posts",
                 loading: false,
-                posts: [],
+                comments: []
             };
         },
-        mounted() {
+        computed: {},
+        created() {
             this.loadPosts();
         },
         methods: {
             loadPosts() {
                 this.loading = true
                 this.posts = []
-                axios
-                    .get(this.$apiUrl + "/posts")
+                Api()
+                    .get(this.getCommentsUrl)
                     .then(res => {
                         this.posts = res.data;
                     })
@@ -91,25 +93,5 @@
 </script>
 
 <style scoped>
-    .card-columns .v-card {
-        margin-bottom: 0.75rem;
-    }
 
-    @media (min-width: 576px) {
-        .card-columns {
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
-            column-count: 3;
-            -webkit-column-gap: 1.25rem;
-            -moz-column-gap: 1.25rem;
-            column-gap: 1.25rem;
-            orphans: 1;
-            widows: 1;
-        }
-
-        .card-columns .v-card {
-            display: inline-block;
-            width: 100%;
-        }
-    }
 </style>

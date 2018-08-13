@@ -76,7 +76,6 @@
                         :disabled="!miniVariant"
                 >
                     <v-list-tile
-                            @click=""
                             ripple
                             :to="item.routerLinkTo"
                             slot="activator"
@@ -105,6 +104,16 @@
         <Notification></Notification>
     </v-app>
 </template>
+
+<style scoped>
+    .v-navigation-drawer--mini-variant{
+        width: 52px !important;
+    }
+
+    .v-navigation-drawer--mini-variant .v-list__tile__action{
+        justify-content: normal;
+    }
+</style>
 
 <script>
     import Notification from '@/components/utilities/Notification'
