@@ -22,8 +22,8 @@
     export default {
         name: 'Home',
         computed: {
-            ...mapGetters({
-                countPosts: 'posts/countPosts'
+            ...mapGetters('posts',{
+                countPosts: 'countPosts'
             }),
 
         }

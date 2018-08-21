@@ -13,10 +13,9 @@
             <v-toolbar-title v-text="title"></v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
-                <!--<v-btn icon class="white&#45;&#45;text">
-                    <v-icon>menu</v-icon>
-                </v-btn>-->
+
             </v-toolbar-items>
+            <NavUser></NavUser>
         </v-toolbar>
 
         <v-navigation-drawer
@@ -117,11 +116,13 @@
 
 <script>
     import Notification from '@/components/utilities/Notification'
+    import NavUser from '@/components/auth/NavUser'
 
     export default {
         name: "App",
         components: {
-            Notification
+            Notification,
+            NavUser
         },
         data() {
             return {

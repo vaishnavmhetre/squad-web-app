@@ -17,6 +17,7 @@
                         name="description"
                         label="Have something to say?"
                         v-model="comment.description"
+                        color="indigo"
                 ></v-textarea>
             </v-flex>
             <v-flex
