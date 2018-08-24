@@ -12,7 +12,7 @@ export const status = {
 
 export const authCreds = {
     client_id: 2,
-    client_secret: 'KqvkoMpzA7dmfUxB2fKXTN4qDWLUrL6BXwAFRcHI',
+    client_secret: 'DcdoxFRI8BZJWuTNC5pycpyWCIURzXOtXUSSWo3O',
     grant_type: 'password'
 }
 
@@ -41,10 +41,10 @@ export function checkAccessTokenAvailable(tokenData) {
 
     if (tokenData.access_token === null)
         return status.ACCESS_TOKEN_UNAVAILABLE
-    else if (!(tokenData.access_token instanceof String))
+    else if ((typeof tokenData.access_token ==='string') || (tokenData.access_token instanceof String))
+        return true
+    else
         return status.ACCESS_TOKEN_INVALID
-
-    return true
 
 }
 
@@ -58,6 +58,5 @@ export function checkAccessTokenValidity(tokenData) {
 }
 
 export function responseHasNoError(response) {
-    console.log(response)
     return (Object.values(status).indexOf(response) === -1)
 }

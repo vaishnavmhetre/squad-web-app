@@ -32,7 +32,8 @@
                     visible: false,
                     color: 'success',
                     multiLine: false,
-                    timeout: 2000
+                    timeout: 2000,
+                    message: ''
                 }
             }
         },

@@ -22,7 +22,7 @@
     export default {
         name: 'Home',
         computed: {
-            ...mapGetters('posts',{
+            ...mapGetters('/auth/user/posts',{
                 countPosts: 'countPosts'
             }),
 

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import authStore from '@/stores/auth/store'
 
-const __API_URL__ = "http://192.168.0.104:8001"
+const __API_URL__ = "http://192.168.1.102:8000"
 
 export default () => {
     return axios.create({

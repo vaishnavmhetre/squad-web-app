@@ -30,6 +30,34 @@ export default new Router({
             // which is lazy-loaded when the route is visited.
             component: () =>
                 import(/* webpackChunkName: "posts.index" */ "./views/posts/Index")
-        }
+        },
+        {
+            path: "/chat",
+            name: "chat",
+            // route level code-splitting
+            // this generates a separate chunk (about.[hash].js) for this route
+            // which is lazy-loaded when the route is visited.
+            component: () =>
+                import(/* webpackChunkName: "chat" */ "./views/Chat")
+        },
+        {
+            path: "/users/me",
+            name: "me_profile",
+            // route level code-splitting
+            // this generates a separate chunk (about.[hash].js) for this route
+            // which is lazy-loaded when the route is visited.
+            component: () =>
+                import(/* webpackChunkName: "me_profile" */ "./views/users/Me")
+        },
+        {
+            path: "/users/:id",
+            name: "user_profile",
+            // route level code-splitting
+            // this generates a separate chunk (about.[hash].js) for this route
+            // which is lazy-loaded when the route is visited.
+            component: () =>
+                import(/* webpackChunkName: "user_profile" */ "./views/users/Other")
+        },
+        
     ]
 });

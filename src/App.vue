@@ -95,6 +95,7 @@
 
         <v-content
                 id="apex-content"
+                style="max-height: 100vh !important;"
         >
             <v-slide-y-reverse-transition>
                 <router-view/>
@@ -139,6 +140,11 @@
                         icon: 'library_books',
                         title: 'Posts',
                         routerLinkTo: '/posts'
+                    },
+                    {
+                        icon: 'chat',
+                        title: 'Chat',
+                        routerLinkTo: '/chat'
                     }
                 ],
             };

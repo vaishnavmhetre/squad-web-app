@@ -1,58 +1,89 @@
 <template>
     <v-toolbar-items>
 
-        <v-btn
-                flat
-                small
-                v-if="isAuthenticated"
-        >
-            <v-icon
-                    size="18"
-            >
-                account_circle
-            </v-icon>
-            <span
-                    class="ml-2"
-            >
-                Fake User
-            </span>
-        </v-btn>
+        <v-menu bottom left offset-y v-if="isAuthenticated">
+            <v-btn slot="activator" flat small :loading="checkIfLoadingUser">
+                <span class="ml-2" v-text="userName">
+                </span>
+            </v-btn>
+            <v-list dense full-width>
+                <v-list-tile avatar to="/users/me">
+                    <v-list-tile-avatar>
+                        <v-icon size="18" class="grey lighten-1 white--text">
+                            account_circle
+                        </v-icon>
+                    </v-list-tile-avatar>
+                    <v-list-tile-title>
+                        Profile
+                    </v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile avatar @click="logOut()" class="red--text">
+                    <v-list-tile-avatar>
+                        <v-icon size="18" class="red lighten-1 white--text">
+                            power_settings_new
+                        </v-icon>
+                    </v-list-tile-avatar>
+                    <v-list-tile-title>
+                        Log out
+                    </v-list-tile-title>
+                </v-list-tile>
+            </v-list>
+        </v-menu>
 
-
-        <v-btn
-                flat
-                small
-                v-else
-                to="/login"
-        >
-            <v-icon
-                    size="18"
-            >
+        <v-btn flat small v-if="!isAuthenticated" to="/login" :loading="checkIfLoadingUser">
+            <v-icon size="18">
                 vpn_key
             </v-icon>
-            <span
-                    class="ml-2"
-            >
+            <span class="ml-2">
                 Login
             </span>
         </v-btn>
+
 
     </v-toolbar-items>
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
+    import {
+        mapGetters,
+        mapActions
+    } from 'vuex'
 
     export default {
         name: "NavUser",
         computed: {
+            ...mapGetters('auth/user', {
+                userName: 'getUserNavDisplayName',
+                checkIfLoadingUser: 'checkIfLoadingUser'
+            }),
             ...mapGetters('auth', {
                 isAuthenticated: 'isAuthenticated'
             })
+        },
+        mounted(){
+            this.resetUser()
+            if(this.isAuthenticated)
+                this.loadUser()
+        },
+        methods: {
+            ...mapActions('auth', {
+                logOutHandle: 'logOut'
+            }),
+            ...mapActions('auth/user', {
+                resetUser: 'resetUser',
+                loadUser: 'loadUser'
+            }),
+            logOut(){
+                this.logOutHandle()
+                this.$router.push('/')
+                this.$eventHub.$emit("notify", {
+                    color: "success",
+                    message: "Good bye!"
+                });
+            }
         }
     }
 </script>
 
 <style scoped>
-
 </style>
