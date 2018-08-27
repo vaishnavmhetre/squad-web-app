@@ -10,10 +10,11 @@
         <v-slide-y-transition mode="out-in">
             <v-card v-if="!loadingUser">
                 <v-card-title primary-title>
-                    <span>
-                        <span class="subheading float-left" v-text="getUser.name" ></span>
+                    <v-flex xs12 style="line-height: 3;">
+                        <span class="subheading float-left" v-text="getUser.name"></span>
+                        <Followings></Followings>
                         <Followers></Followers>
-                    </span>
+                    </v-flex>
                 </v-card-title>
                 <v-divider></v-divider>
                 <v-card-text>
@@ -25,7 +26,6 @@
                             <span>Send a mail</span>
                         </v-tooltip>
                         <span v-text="getUser.email"></span>
-
                     </div>
                 </v-card-text>
             </v-card>
@@ -39,12 +39,14 @@
     } from 'vuex'
 
     import Followers from '@/components/users/me/Followers'
+    import Followings from '@/components/users/me/Followings'
 
 
     export default {
         name: 'Me',
         components: {
-            Followers
+            Followers,
+            Followings
         },
         computed: {
             ...mapGetters('auth/user', {

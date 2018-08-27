@@ -5,7 +5,6 @@ import VuexPersistence from 'vuex-persist'
 
 /* Importing stores */
 import auth from '@/stores/auth/store'
-import posts from '@/stores/posts/store'
 
 Vue.use(Vuex);
 
@@ -17,7 +16,6 @@ const vuexLocal = new VuexPersistence({
 export default new Vuex.Store({
     modules: {
         auth,
-        posts
     },
     plugins: [vuexLocal.plugin]
 });

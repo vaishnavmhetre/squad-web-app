@@ -2,7 +2,7 @@ import Api from '@/plugins/Api'
 import Vue from 'vue'
 
 
-const AuthUserFollowingsUrl = '/users/me/folllowing'
+const AuthUserFollowingsUrl = '/users/me/followings'
 
 
 export default {
@@ -17,7 +17,7 @@ export default {
             .then(res => {
                 Vue.set(
                     state,
-                    'followings',
+                    'followers',
                     res.data
                 )
             })
@@ -40,7 +40,7 @@ export default {
 
         Vue.set(
             state,
-            'followings', []
+            'followers', []
         )
 
     }

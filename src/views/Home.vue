@@ -2,9 +2,8 @@
     <v-container fluid>
         <v-slide-y-transition mode="out-in">
             <v-layout column align-center>
-
                 <blockquote>
-                    We currently have <strong>{{ countPosts }}</strong> posts
+                    We currently have <strong>some</strong> posts
                 </blockquote>
             </v-layout>
         </v-slide-y-transition>
@@ -17,15 +16,8 @@
 </style>
 
 <script>
-    import { mapGetters } from 'vuex'
 
     export default {
         name: 'Home',
-        computed: {
-            ...mapGetters('/auth/user/posts',{
-                countPosts: 'countPosts'
-            }),
-
-        }
     }
 </script>

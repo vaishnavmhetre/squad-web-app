@@ -1,15 +1,19 @@
 <template>
     <v-toolbar-items>
 
-        <v-menu bottom left offset-y v-if="isAuthenticated">
-            <v-btn slot="activator" flat small :loading="checkIfLoadingUser">
-                <span class="ml-2" v-text="userName">
-                </span>
+        <v-menu bottom left offset-y v-if="isAuthenticated" v-model="navUserMenu">
+            <v-btn :icon="!navUserMenu" slot="activator" flat :loading="checkIfLoadingUser" class="mx-2">
+                <v-icon>
+                    account_circle
+                </v-icon>
+                <v-slide-x-transition>
+                    <span class="ml-2" v-text="userName" v-if="navUserMenu"></span>
+                </v-slide-x-transition>
             </v-btn>
             <v-list dense full-width>
                 <v-list-tile avatar to="/users/me">
                     <v-list-tile-avatar>
-                        <v-icon size="18" class="grey lighten-1 white--text">
+                        <v-icon size="18">
                             account_circle
                         </v-icon>
                     </v-list-tile-avatar>
@@ -19,7 +23,7 @@
                 </v-list-tile>
                 <v-list-tile avatar @click="logOut()" class="red--text">
                     <v-list-tile-avatar>
-                        <v-icon size="18" class="red lighten-1 white--text">
+                        <v-icon size="18" class="red--text">
                             power_settings_new
                         </v-icon>
                     </v-list-tile-avatar>
@@ -44,13 +48,15 @@
 </template>
 
 <script>
-    import {
-        mapGetters,
-        mapActions
-    } from 'vuex'
+    import {mapActions, mapGetters} from 'vuex'
 
     export default {
         name: "NavUser",
+        data() {
+            return {
+                navUserMenu: false
+            }
+        },
         computed: {
             ...mapGetters('auth/user', {
                 userName: 'getUserNavDisplayName',
@@ -60,9 +66,9 @@
                 isAuthenticated: 'isAuthenticated'
             })
         },
-        mounted(){
+        mounted() {
             this.resetUser()
-            if(this.isAuthenticated)
+            if (this.isAuthenticated)
                 this.loadUser()
         },
         methods: {
@@ -73,7 +79,7 @@
                 resetUser: 'resetUser',
                 loadUser: 'loadUser'
             }),
-            logOut(){
+            logOut() {
                 this.logOutHandle()
                 this.$router.push('/')
                 this.$eventHub.$emit("notify", {

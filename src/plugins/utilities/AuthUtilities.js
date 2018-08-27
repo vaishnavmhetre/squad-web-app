@@ -12,7 +12,7 @@ export const status = {
 
 export const authCreds = {
     client_id: 2,
-    client_secret: 'DcdoxFRI8BZJWuTNC5pycpyWCIURzXOtXUSSWo3O',
+    client_secret: 'MtgogAqTYR1Vrc9Gm0NYcNSVHX7oG03P5HRMvjO7',
     grant_type: 'password'
 }
 

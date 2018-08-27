@@ -62,7 +62,8 @@
             return {
                 getCommentsUrl: "/posts",
                 loading: false,
-                comments: []
+                comments: [],
+
             };
         },
         computed: {},

@@ -12,9 +12,7 @@
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title v-text="title"></v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-items>
-
-            </v-toolbar-items>
+            <NavBarOptions></NavBarOptions>
             <NavUser></NavUser>
         </v-toolbar>
 
@@ -63,7 +61,6 @@
                             <span>Shorten</span>
                         </v-tooltip>
                     </v-list-tile-action>
-
                 </v-list-tile>
             </v-list>
             <v-divider light></v-divider>
@@ -118,12 +115,14 @@
 <script>
     import Notification from '@/components/utilities/Notification'
     import NavUser from '@/components/auth/NavUser'
+    import NavBarOptions from '@/components/auth/NavBarOptions'
 
     export default {
         name: "App",
         components: {
             Notification,
-            NavUser
+            NavUser,
+            NavBarOptions
         },
         data() {
             return {

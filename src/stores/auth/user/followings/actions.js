@@ -3,7 +3,7 @@ export default {
         dispatch('resetFollowings')
         commit('FETCH_FOLLOWINGS')
     },
-    resetFollowings: ({state, comit}) => {
+    resetFollowings: ({state, commit}) => {
         commit('RESET_FOLLOWINGS')
     }
 }
