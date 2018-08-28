@@ -1,9 +1,9 @@
 export default {
     countFollowings: (state) => {
-        return state.followers.length
+        return state.followings.length
     },
     getFollowings: (state) => {
-        return state.followers
+        return state.followings
     },
     checkIfLoadingFollowings: (state) => {
         return state.loadingFollowings

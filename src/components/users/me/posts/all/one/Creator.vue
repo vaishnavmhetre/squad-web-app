@@ -7,18 +7,20 @@
             indeterminate
             v-if="loading"
         ></v-progress-circular>
-        <span
-                :class="loading ? 'font-italic ml-1' : ''"
-                v-text="loading ? 'Loading Creator' : creator.name "
-        >
+         <span
+                 :class="loading ? 'font-italic ml-1' : ''"
+                 v-if="loading"
+         >
             Loading Creator
         </span>
+        <router-link :to="(authUserId != creator.id) ? {name: 'user_profile', params: { id: creator.id }} : {name: 'me_profile'}" style="text-decoration: none" class="grey--text" v-text="creator.name"
+                     v-else></router-link>
     </span>
 </template>
 
 <script>
     import Api from "@/plugins/Api";
-    import axios from "axios";
+    import {mapGetters} from 'vuex'
 
     export default {
         name: "Creator",
@@ -31,6 +33,9 @@
             }
         },
         computed: {
+            ...mapGetters('auth/user', {
+                authUserId: 'getUserId'
+            })
         },
         created() {
             this.loadCreator()

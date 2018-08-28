@@ -133,17 +133,12 @@
                     {
                         icon: 'home',
                         title: 'Home',
-                        routerLinkTo: '/'
-                    },
-                    {
-                        icon: 'library_books',
-                        title: 'Posts',
-                        routerLinkTo: '/posts'
+                        routerLinkTo: {name: 'home'}
                     },
                     {
                         icon: 'chat',
                         title: 'Chat',
-                        routerLinkTo: '/chat'
+                        routerLinkTo: {name: 'chat'}
                     }
                 ],
             };

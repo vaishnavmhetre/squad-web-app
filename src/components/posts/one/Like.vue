@@ -40,7 +40,7 @@
                             </v-toolbar-items>
                         </v-toolbar>
                         <v-list dense style="overflow-y: scroll;">
-                            <v-list-tile v-for="user in likes" :key="user.id" class="mt-2" id="#likes-users">
+                            <v-list-tile v-for="user in likes" :key="user.id" class="mt-2" id="#likes-users"  :to="(userId != user.id) ? {name: 'user_profile', params: { id: user.id }} : {name: 'me_profile'}" >
                                 <v-list-tile-content>
                                     <v-list-tile-title v-text="user.name"></v-list-tile-title>
                                 </v-list-tile-content>

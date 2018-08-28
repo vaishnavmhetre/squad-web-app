@@ -1,23 +1,12 @@
 <template>
-    <v-container fluid>
-        <v-slide-y-transition mode="out-in">
-            <v-layout column align-center>
-                <blockquote>
-                    We currently have <strong>some</strong> posts
-                </blockquote>
-            </v-layout>
-        </v-slide-y-transition>
-    </v-container>
+    <AllPosts></AllPosts>
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
-
 <script>
-
+    import AllPosts from "@/components/posts/all/All.vue";
     export default {
-        name: 'Home',
+        components: {
+            AllPosts
+        }
     }
 </script>

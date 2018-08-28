@@ -1,6 +1,5 @@
 <template>
     <v-toolbar-items>
-
         <v-menu bottom left offset-y v-if="isAuthenticated" v-model="navUserMenu">
             <v-btn :icon="!navUserMenu" slot="activator" flat :loading="checkIfLoadingUser" class="mx-2">
                 <v-icon>
@@ -11,7 +10,7 @@
                 </v-slide-x-transition>
             </v-btn>
             <v-list dense full-width>
-                <v-list-tile avatar to="/users/me">
+                <v-list-tile avatar :to="{name: 'me_profile'}">
                     <v-list-tile-avatar>
                         <v-icon size="18">
                             account_circle
@@ -34,7 +33,7 @@
             </v-list>
         </v-menu>
 
-        <v-btn flat small v-if="!isAuthenticated" to="/login" :loading="checkIfLoadingUser">
+        <v-btn flat small v-if="!isAuthenticated" :to="{name: 'login'}" :loading="checkIfLoadingUser">
             <v-icon size="18">
                 vpn_key
             </v-icon>
@@ -81,7 +80,7 @@
             }),
             logOut() {
                 this.logOutHandle()
-                this.$router.push('/')
+                this.$router.push({name: 'login'})
                 this.$eventHub.$emit("notify", {
                     color: "success",
                     message: "Good bye!"

@@ -1,7 +1,7 @@
 <template>
     <v-toolbar-items class="mx-1">
         <v-menu bottom left offset-y v-if="isAuthenticated">
-            <v-btn icon slot="activator" flat :loading="checkIfLoadingUser" class="mx-2">
+            <v-btn icon slot="activator" flat :loading="checkIfLoadingUser" class="mx-3">
                 <v-badge overlap color="indigo">
                     <v-icon>
                         message
@@ -10,7 +10,7 @@
                 </v-badge>
             </v-btn>
             <v-list dense full-width>
-                <v-list-tile avatar to="/users/me">
+                <v-list-tile avatar :to="{name: 'me_profile'}">
                     <v-list-tile-avatar>
                         <v-icon size="18">
                             account_circle
@@ -34,13 +34,13 @@
         </v-menu>
 
         <v-menu bottom left offset-y v-if="isAuthenticated">
-            <v-btn icon slot="activator" flat :loading="checkIfLoadingUser" class="mx-2">
+            <v-btn icon slot="activator" flat :loading="checkIfLoadingUser" class="mx-3">
                 <v-icon>
                     notifications
                 </v-icon>
             </v-btn>
             <v-list dense full-width>
-                <v-list-tile avatar to="/users/me">
+                <v-list-tile avatar :to="{name: 'me_profile'}">
                     <v-list-tile-avatar>
                         <v-icon size="18">
                             account_circle

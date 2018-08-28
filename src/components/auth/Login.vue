@@ -88,7 +88,7 @@
                                         color: "success",
                                         message: "Welcome to the Squad"
                                     });
-                                    this.$router.push('posts')
+                                    this.$router.push({name: 'home'})
                                 })
                                 .catch((err) => {
 

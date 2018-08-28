@@ -2,22 +2,6 @@
     <v-container>
         <v-layout align-center justify-center>
             <v-flex xs12 sm8>
-                <v-layout row class="my-2 display-1  grey--text text--darken-1">
-                    <v-flex xs12 class="">
-                        Posts
-                    </v-flex>
-                    <v-flex xs2 class="text-xs-right">
-                        <v-tooltip left>
-                            <v-btn slot="activator" icon flat small class="grey--text text--darken-1" @click="loadPosts"
-                                   :disabled="loading">
-                                <v-icon>refresh</v-icon>
-                            </v-btn>
-                            <span v-if="loading">Refreshing</span>
-                            <span v-else>Refresh</span>
-                        </v-tooltip>
-                    </v-flex>
-                </v-layout>
-                <v-divider></v-divider>
                 <v-layout row wrap align-center justify-center>
                     <v-flex xs12>
                         <v-slide-y-transition mode="out-in">

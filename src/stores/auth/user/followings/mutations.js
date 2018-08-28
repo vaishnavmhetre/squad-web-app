@@ -17,7 +17,7 @@ export default {
             .then(res => {
                 Vue.set(
                     state,
-                    'followers',
+                    'followings',
                     res.data
                 )
             })
@@ -40,7 +40,7 @@ export default {
 
         Vue.set(
             state,
-            'followers', []
+            'followings', []
         )
 
     }

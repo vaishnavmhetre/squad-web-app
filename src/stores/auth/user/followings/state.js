@@ -1,4 +1,4 @@
 export default {
-    followers: [],
+    followings: [],
     loadingFollowings: false
 }

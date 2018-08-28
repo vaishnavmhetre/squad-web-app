@@ -1,17 +1,17 @@
 <template>
     <span style="float: right;">
         <v-fade-transition mode="out-in">
-            <span v-if="loading" style="float: right;">
+            <span v-if="loadingFollowings" style="float: right;">
                 <span class="font-italic grey--text">
                     <v-progress-circular :size="8" color="primary" :width="1" indeterminate></v-progress-circular>
                     <span class="font-italic ml-1 caption">
-                        {{(loading) ? 'Loading Followings' : '' }}
+                        {{(loadingFollowings) ? 'Loading Followings' : '' }}
                     </span>
                 </span>
             </span>
         </v-fade-transition>
         <v-fade-transition mode="out-in">
-            <span v-if="!loading" style="float: right;">
+            <span v-if="!loadingFollowings" style="float: right;">
                 <span v-if="countFollowings > 0">
                     <v-tooltip left>
                         <v-btn icon flat class="grey--text" @click="followings_dialog = true" slot="activator">
@@ -35,8 +35,7 @@
                             </v-toolbar>
                             <v-list dense style="overflow-y: scroll;">
                                 <v-list-tile v-for="user in followings" :key="user.id" class="mt-2"
-                                             id="#followings-users"
-                                             :to="(authUserId != user.id) ? {name: 'user_profile', params: { id: user.id }} : {name: 'me_profile'}">
+                                             id="#followings-users" :to="(authUserId != user.id) ? {name: 'user_profile', params: { id: user.id }} : {name: 'me_profile'}" >
                                     <v-list-tile-content>
                                         <v-list-tile-title v-text="user.name"></v-list-tile-title>
                                     </v-list-tile-content>
@@ -62,34 +61,53 @@
     import {mapActions, mapGetters} from 'vuex'
 
     import Me from '@/components/users/me/Me'
+    import Api from "@/plugins/Api";
 
     export default {
         name: 'Followings',
+        props: ['user_id'],
         components: {
             Me
         },
         data() {
             return {
-                followings_dialog: false
+                getUserFollowingsUrl: '/users/' + this.user_id + '/followings',
+                followings_dialog: false,
+                loadingFollowings: true,
+                followings: [],
             }
         },
         mounted() {
             this.loadFollowings()
         },
         computed: {
-            ...mapGetters('auth/user/followings', {
-                countFollowings: 'countFollowings',
-                followings: 'getFollowings',
-                loading: 'checkIfLoadingFollowings'
-            }),
+            countFollowings: {
+                get() {
+                    return this.followings.length
+                }
+            },
             ...mapGetters('auth/user', {
                 authUserId: 'getUserId'
             })
         },
         methods: {
-            ...mapActions('auth/user/followings', {
-                loadFollowings: 'loadFollowings'
-            })
+            loadFollowings() {
+                this.loadingFollowings = true
+                Api()
+                    .get(this.getUserFollowingsUrl)
+                    .then(res => {
+                        this.followings = res.data
+                    })
+                    .catch(() => {
+                        this.$eventHub.$emit("notify", {
+                            color: "error",
+                            message: "Couldn't load Followings"
+                        });
+                    })
+                    .finally(() => {
+                        this.loadingFollowings = false
+                    })
+            }
         }
     }
 </script>

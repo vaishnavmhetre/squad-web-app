@@ -9,27 +9,28 @@ export default new Router({
     base: process.env.BASE_URL,
     routes: [
         {
-            path: "/",
-            name: "home",
-            component: Home
-        },
-        {
             path: "/login",
             name: "login",
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
             component: () =>
-                import(/* webpackChunkName: "login" */ "./views/Login.vue")
+                import(/* webpackChunkName: "login" */ "./views/Login.vue"),
+            meta: {
+                requiresAuth: false
+            }
         },
         {
-            path: "/posts",
-            name: "posts.index",
+            path: "/home",
+            name: "home",
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
             component: () =>
-                import(/* webpackChunkName: "posts.index" */ "./views/posts/Index")
+                import(/* webpackChunkName: "posts.index" */ "./views/Home"),
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: "/chat",
@@ -47,7 +48,10 @@ export default new Router({
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
             component: () =>
-                import(/* webpackChunkName: "me_profile" */ "./views/users/Me")
+                import(/* webpackChunkName: "me_profile" */ "./views/users/Me"),
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: "/users/:id",
@@ -56,7 +60,10 @@ export default new Router({
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
             component: () =>
-                import(/* webpackChunkName: "user_profile" */ "./views/users/Other")
+                import(/* webpackChunkName: "user_profile" */ "./views/users/Other"),
+            meta: {
+                requiresAuth: true
+            }
         },
         
     ]

@@ -15,7 +15,7 @@
                         <v-flex class="text-xs-right mx-3">
                             <v-icon color="grey" class="text--lighten-1">library_books</v-icon>
                         </v-flex>
-                        <v-flex class="text-xs-left">You've posted nothing yet!</v-flex>
+                        <v-flex class="text-xs-left">Nothing posted yet!</v-flex>
                     </v-layout>
                 </v-slide-y-transition>
 
@@ -35,12 +35,13 @@
 
     export default {
         name: "All",
+        props: ['user_id'],
         components: {
             OnePost
         },
         data() {
             return {
-                getPostsUrl: "/users/me/posts",
+                getPostsUrl: "/users/"+ this.user_id +"/posts",
                 loading: false,
                 posts: [],
 

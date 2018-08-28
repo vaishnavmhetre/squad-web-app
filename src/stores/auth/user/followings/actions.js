@@ -5,5 +5,6 @@ export default {
     },
     resetFollowings: ({state, commit}) => {
         commit('RESET_FOLLOWINGS')
-    }
+    },
+
 }
